@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+
+    <title>Share Price Graph Generator</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'assets/css/bootstrap.css' %}" rel="stylesheet" />
+
+    <!-- Custom styles for this template -->
+    <link href="{% static 'assets/css/main.css' %}" rel="stylesheet" />
+    <link rel="stylesheet" href="{% static 'assets/css/font-awesome.min.css' %}" />
+
+    <script src="{% static 'assets/js/jquery.min.js' %}"></script>
+    <script src="{% static 'assets/js/modernizr.custom.js' %}"></script>
+
+    <link
+      href="http://fonts.googleapis.com/css?family=Oswald:400,300,700"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link
+      href="http://fonts.googleapis.com/css?family=EB+Garamond"
+      rel="stylesheet"
+      type="text/css"
+    />
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="{% static 'assets/js/html5shiv.js' %}"></script>
+      <script src="{% static 'assets/js/respond.min.js' %}"></script>
+    <![endif]-->
+  </head>
+
+  <body data-spy="scroll" data-offset="0">
+    <!-- ========== HEADER SECTION ========== -->
+    {% if messages %}
+        {% for message in messages %}
+         {% if message.tags %}  <script>alert("{{ message }}")</script> {% endif %}
+        {% endfor %}
+
+    {% endif %}
+    <div id="headerwrap">
+      <div class="container">
+        <br />
+        <div class="row">
+          <h1>Share Price Graph Generator</h1>
+          <br />
+          <h3>Enter the ticker (stock symbol) and the number of previous days:</h3>
+          <br />
+		  <div class="col-lg-6 col-lg-offset-3">
+			<form action="getgraph" method="post">
+        {% csrf_token %}
+			  <input
+				type="text"
+				name="share_name"
+				class="form-control"
+				placeholder="Ticker. eg: SBIN.NS"
+			  />
+			  <br />
+        <input
+				type="number"
+				name="numberofdays"
+				class="form-control"
+				placeholder="Number of previous days (Please enter a number greater than 1)"
+			  />
+			  <br />
+        <button type="submit" class="btn btn-success btn-lg">Generate Graph</button>
+			</form>
+          <br />
+          <div class="col-lg-6 col-lg-offset-3"></div>
+        </div>
+      </div>
+      <!-- /container -->
+    </div>
+    <!-- /headerwrap -->
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="{% static 'assets/js/classie.js' %}"></script>
+    <script src="{% static 'assets/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'assets/js/smoothscroll.js' %}"></script>
+    <script src="{% static 'assets/js/main.js' %}"></script>
+  </body>
+</html>
